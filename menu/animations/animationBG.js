@@ -1,2 +1,2 @@
-console.dir('gg')
+console.log('gg')
 
