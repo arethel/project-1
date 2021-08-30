@@ -1,0 +1,29 @@
+@import "_nulling";
+
+body{
+    background: rgb(239,181,123);
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(239,181,123,1) 0%, rgba(172,112,22,1) 100%);
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(239,181,123,1) 0%,rgba(172,112,22,1) 100%);
+    background: radial-gradient(ellipse at center,  rgba(239,181,123,1) 0%,rgba(172,112,22,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efb57b', endColorstr='#ac7016',GradientType=1 );
+}
+
+.mainMenu{
+    font-size: 30px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: rgb(158, 96, 52);
+    text-align: center;
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    
+    border: 1px solid black;
+  } 
+  
+  .menuPoints{
+    margin: 0px 0px 20px 0px;
+    font-size: 60px;
+    
+  }
