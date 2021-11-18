@@ -3,24 +3,27 @@ let port = 3000
 let app = express()
 let server = require('http').createServer(app)
 let io = require('socket.io')(server)
-
 server.listen(port)
+
 
 
 let connections = new Map()
 
+
 //icon
 app.use('/favicon.ico', express.static('icon/favicon.ico'));
 //
+
 
 //redirect
 app.get("/",function (req, res) {
     res.redirect("/menu")
 });
 
+
 //404
 app.get('/404',function(req,res){
-    res.sendFile(__dirname+'/404.html')
+    res.sendFile(__dirname+'/404/404.html')
 })
 
 app.use('/play',express.static('game'))
@@ -31,7 +34,7 @@ app.use('/menu',express.static('menu'))
 
 
 
-let syncTimer = require('./syncTimer')
+// let syncTimer = require('./workWithIt/syncTimer')
 
 io.sockets.on('connection', function(socket){
     socket.on('disconnect',function(data){

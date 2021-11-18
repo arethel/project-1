@@ -92,8 +92,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translateY(-50%) translateX(-50%);
-          transform: translateY(-50%) translateX(-50%);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+          transform: translate(-50%, -50%) rotate(45deg);
   border: 1px solid black;
 }
 
@@ -116,4 +116,111 @@ body {
   user-select: none;
   /* Non-prefixed version, currently
                                   not supported by any browser */
+}
+
+.sign {
+  height: 100%;
+  width: 100%;
+}
+
+.sign-panel {
+  height: 40%;
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: aliceblue;
+  font-size: 50px;
+  text-align: center;
+}
+
+.sign-points {
+  cursor: pointer;
+}
+
+.sign-up {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: aliceblue;
+  font-size: 30px;
+  text-align: center;
+}
+
+.sign-up-points {
+  margin: 10px 0px;
+}
+
+.sign-up-points_enter {
+  margin: 10px 0px;
+}
+
+.sign-up-points_enter input {
+  height: 40px;
+  font-size: 35px;
+  width: 60%;
+}
+
+.sign-in {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: aliceblue;
+  font-size: 30px;
+  text-align: center;
+}
+
+.sign-in-points {
+  margin: 10px 0px;
+}
+
+.sign-in-points_enter {
+  margin: 10px 0px;
+}
+
+.sign-in-points_enter input {
+  height: 40px;
+  font-size: 35px;
+  width: 60%;
+}
+
+.guest_div {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: aliceblue;
+  font-size: 30px;
+  text-align: center;
+}
+
+.guest-points {
+  margin: 10px 0px;
+}
+
+.guest-points_enter {
+  margin: 10px 0px;
+}
+
+.guest-points_enter input {
+  height: 40px;
+  font-size: 35px;
+  width: 60%;
+}
+
+.invisible {
+  visibility: hidden;
 }

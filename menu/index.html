@@ -8,8 +8,7 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="animations/animationBG.js"></script>
-
+    
 </head>
 <body>
     <div class="content">
@@ -21,9 +20,81 @@
             
     
         </div>
+        
+        <div class="sign unselectable">
+            <div class="sign-panel">
+                <p class="sign-points sign_in">sign in</p>
+                <p class="sign-points sign_up">sign up</p>
+                <p class="sign-points guest">guest</p>
+            </div>
+            
+            <div class="sign-up invisible">
+                <p class="sign-up-points sign-up_name">name</p>
+                <form class="sign-up-points_enter sign-up_name_enter">
+                    <input type="text">
+                </form>
+                
+                <p class="sign-up-points sign-up_email">email</p>
+                <form class="sign-up-points_enter sign-up_email_enter">
+                    <input type="text">
+                </form>
+                
+                <p class="sign-up-points sign-up_password">password</p>
+                <form class="sign-up-points_enter sign-up_password_enter">
+                    <input type="text">
+                </form>
+                
+                <p class="sign-up-points sign-up_sign-up">sign up</p>
+                
+                <p class="sign-up-points sign-up_back">back</p>
+            </div>
+            
+            <div class="sign-in invisible">
+                <p class="sign-in-points sign-in_login">name or email</p>
+                <form class="sign-in-points_enter sign-in_login_enter">
+                    <input type="text">
+                </form>
+                
+                <p class="sign-in-points sign-in_password">password</p>
+                <form class="sign-in-points_enter sign-in_password_enter">
+                    <input type="text">
+                </form>
+                
+                <p class="sign-in-points sign-in_sign-in">sign in</p>
+                
+                <p class="sign-in-points sign-in_back">back</p>
+            </div>
+            
+            <div class="guest_div invisible">
+                <p class="guest-points guest_name">name</p>
+                <form class="guest-points_enter guest_name_enter">
+                    <input type="text">
+                </form>
+                
+                <p class="guest-points guest_password">password</p>
+                <form class="guest-points_enter guest_password_enter">
+                    <input type="text">
+                </form>
+                
+                <p class="guest-points guest_play">play!</p>
+                
+                <p class="guest-points guest_back">back</p>
+            </div>
+            
+        </div>
+        
     </div>
     
-
+    <div class="scripts">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="animations/animationBG.js"></script>
+        <script src="sign/signup.js"></script>
+        <script src="sign/signin.js"></script>
+        <script src="sign/guest.js"></script>
+        
+        
+    </div>
+    
     
 </body>
 </html>
