@@ -5,7 +5,23 @@ let server = require('http').createServer(app)
 let io = require('socket.io')(server)
 server.listen(port)
 
+let mysql = require('mysql')
 
+let connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password:'12345678',
+    database: 'logins'
+})
+
+connection.connect(function(err) {
+    if (err) {
+      console.error('error: ' + err.message);
+      return;
+    }
+   
+    console.log('connected');
+  });
 
 let connections = new Map()
 
