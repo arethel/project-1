@@ -140,7 +140,7 @@ body {
   cursor: pointer;
 }
 
-.sign-up {
+.sign-up_div {
   height: 50%;
   width: 50%;
   position: absolute;
@@ -167,7 +167,7 @@ body {
   width: 60%;
 }
 
-.sign-in {
+.sign-in_div {
   height: 50%;
   width: 50%;
   position: absolute;
