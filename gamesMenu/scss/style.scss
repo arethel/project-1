@@ -1,0 +1,50 @@
+@import "_nulling";
+
+body{
+  background: rgb(239,181,123);
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(239,181,123,1) 0%, rgba(172,112,22,1) 100%);
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(239,181,123,1) 0%,rgba(172,112,22,1) 100%);
+  background: radial-gradient(ellipse at center,  rgba(239,181,123,1) 0%,rgba(172,112,22,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efb57b', endColorstr='#ac7016',GradientType=1 );
+}
+
+.content{
+  height: 100%;
+  position: relative;
+}
+
+.block1 {
+  height: 90%;
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255);
+  
+  font-size: 50px;
+  text-align: center;
+}
+
+.game {
+  height: 80px;
+  width: 90%;
+  background-color: rgb(151, 151, 151);
+  margin: 20px auto;
+}
+
+
+
+.unselectable {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+  
+.invisible{
+  visibility: hidden;
+}

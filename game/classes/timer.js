@@ -4,10 +4,16 @@ class Timer{
     txt
     #folder
 
-    constructor(timer){
-        this.#counter=timer
+    constructor(){
+        this.#counter=-1
         this.#folder = createDiv(document.body, 'timer')
-        this.txt = createText(this.#folder, 'time', '--',centerOfSetGridX, 20)
+        this.txt = createText(this.#folder, 'time', '--', centerOfSetGridX, 20)
+        
+        setInterval(() => {
+            if (this.#counter>0) {
+                this.counter=this.#counter-0.1
+            }
+        },100)
     }
 
 

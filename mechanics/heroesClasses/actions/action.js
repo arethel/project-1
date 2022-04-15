@@ -1,14 +1,14 @@
 class Action{
-    #hero
+    hero
     #selected=-1
 
-    #actions = new Map()
-    #chosenActions
-
+    actions = new Map()
+    chosenActions
+    useAbleActions=new Map()
 
     constructor(hero,actions){
-        this.#hero=hero
-        this.#chosenActions=actions
+        this.hero=hero
+        this.chosenActions=actions
 
         this.createActions()
     }
@@ -31,14 +31,14 @@ class Action{
                 this.funOnTimer=function(){}
             },
             funOnTimer: function(){
-
+            
             },
             funAfterTimer: function(){
                 this.funOnTimer=function(){}
                 action.selected=-1
             }
         }
-        this.#actions.set(move.num,move)
+        this.actions.set(move.num,move)
         
         let attack = {
             name: 'attack',
@@ -56,7 +56,7 @@ class Action{
 
             }
         }
-        this.#actions.set(attack.num,attack)
+        this.actions.set(attack.num,attack)
 
         let shield = {
             name: 'shield',
@@ -75,16 +75,16 @@ class Action{
                 action.selected=-1
             }
         }
-        this.#actions.set(shield.num,shield)
+        this.actions.set(shield.num,shield)
 
     }
 
     createActions(){
         this.fillActions()
-        this.#chosenActions.forEach(num=>{
-            let act = this.#actions.get(num)
+        this.chosenActions.forEach(num => {
+            let act = this.actions.get(num)
             if(act!==undefined){
-                act.createThis()
+                this.useAbleActions.set(num,act)
             }
         })
     }
@@ -92,12 +92,12 @@ class Action{
 
     set selected(selected){
         this.#selected = selected
-        this.#chosenActions.forEach(num=>{
+        this.chosenActions.forEach(num=>{
             if(num===selected){
-                this.#actions.get(num).funImmediately()
+                this.actions.get(num).funImmediately()
             }
             else{
-                this.#actions.get(num).funToUndo()
+                this.actions.get(num).funToUndo()
             }
 
         })
@@ -106,9 +106,7 @@ class Action{
     
 
 
-    get actions(){return this.#actions}
     get selected(){return this.#selected}
-    get hero(){return this.#hero}
 
 }
 

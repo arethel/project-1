@@ -1,26 +1,24 @@
-let player = 0
+let player = sessionStorage.getItem('HFroom')
 
-socket.emit('get player')
 
-socket.on('set player',function(pl){
-    player = pl
-    testScene()
-})
 
 let grid
 let knight0
 let knight1
 let timer
+testScene()
+
 function testScene(){
     document.title = 'player '+player
 
 
     grid = new Grid(horizontalCells,verticalCells,[centerOfSetGridX,centerOfSetGridY],true)
 
-    knight0 = new Knight('Knight',0,[6,0])
+    knight0 = new Knight(player,[6,0])
 
-    knight1 = new Knight('Knight',1,[5,0])
+    knight1 = new Knight(1,[5,0])
 
 
-    timer = new Timer(5)
+    timer = new Timer()
 }
+

@@ -1,5 +1,5 @@
 class Hero{
-    name= 'hero'
+    #name= 'hero'
     #fullName
     #num=[0,0]
     #xOy=[0,0]
@@ -23,7 +23,8 @@ class Hero{
     #action = null
     #actionsFolder
 
-    constructor(player,num){
+    constructor(name,player,num){
+        this.#name=name
         this.#num=num
         this.#player=player
         this.#createHero()
@@ -32,7 +33,7 @@ class Hero{
     }
 
     #createHero(){
-        this.#fullName = this.name+this.#player
+        this.#fullName = this.#name+this.#player
         this.#xOy = grid.allHexes.get(JSON.stringify([this.#num[0],this.#num[1]])).xOy
         
 
@@ -43,14 +44,14 @@ class Hero{
         let sizeOfHexBigger = Normal.getSizeOfHex(normal.normal+2)
 
         let allHeroes = document.getElementById('heroes')
-        let heroes = document.getElementById(this.name)
+        let heroes = document.getElementById(this.#name)
         let hero = document.getElementsByClassName(this.#fullName)[0]
 
         if(allHeroes===null)
             allHeroes=createDiv(document.body,'heroes')
         this.#allHeroesFolder=allHeroes
         if(heroes===null)
-            heroes = createDiv(allHeroes,this.name)
+            heroes = createDiv(allHeroes,this.#name)
         this.#heroesFolder=heroes
         if(hero===undefined)
             hero = createDiv(heroes,'',this.#fullName)
@@ -58,7 +59,7 @@ class Hero{
         
         this.#img=createImg(hero,this.#fullName,this.#wayToHero,
             sizeOfHexBigger*2,normalBigger*2,
-            this.#xOy[0]-normal.sizeOfHex,this.#xOy[1]-normal.normal,this.name+' player'+this.#player)
+            this.#xOy[0]-normal.sizeOfHex,this.#xOy[1]-normal.normal,this.#name+' player'+this.#player)
         grid.addObj(this,this.#player)
 
         if(this.#player===player){
@@ -147,6 +148,7 @@ class Hero{
     get allHeroesFolder(){ return this.#allHeroesFolder }
     get img(){ return this.#img }
     get player(){ return this.#player }
+    get name(){ return this.#name }
     get fullName(){ return this.#fullName }
     get canUseAction(){ return this.#canUseAction }
 

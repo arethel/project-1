@@ -7,14 +7,14 @@ server.listen(port)
 
 let mysql = require('mysql')
 
-let connection = mysql.createConnection({
+let SQLconnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password:'12345678',
     database: 'logins'
 })
 
-connection.connect(function(err) {
+SQLconnection.connect(function(err) {
     if (err) {
       console.error('error: ' + err.message);
       return;
@@ -23,7 +23,6 @@ connection.connect(function(err) {
     console.log('connected');
   });
 
-let connections = new Map()
 
 
 //icon
@@ -44,52 +43,89 @@ app.get('/404',function(req,res){
 
 app.use('/play',express.static('game'))
 
-app.use('/menu',express.static('menu'))
+app.use('/menu', express.static('menu'))
+
+app.use('/gamesmenu',express.static('gamesMenu'))
+
+let IOconnections = new Map()
+
+let registration = require('./registration')
+let logIn = require('./logIn')
+let logged = require('./logged')
+let gamesTable = require('./gamesTable')
+let sendRG = require('./sendRequestGame')
+let gameLoader = require('./gameLoader')
+
+sendRG.io=io
 
 
 
 
+let waitingForStartGame1 = new Map()
+let waitingForStartGame2 = new Map()
+let gameConfirmed = new Map()
 
-// let syncTimer = require('./workWithIt/syncTimer')
-
-io.sockets.on('connection', function(socket){
-    socket.on('disconnect',function(data){
-        connections.delete(socket)
-    })
-
+io.sockets.on('connection', function (socket) {
     
-    if(connections.size>0){
-        let maxInd = 0
-        let minInd = 0
-        Array.from(connections.values()).forEach(sock => {
-            if(sock>=maxInd){
-                maxInd = sock+1
+    
+    IOconnections.set(socket, -1)
+    socket.on('disconnect',function(data){
+        IOconnections.delete(socket)
+    })
+    
+    
+    let checkForLogin = logged.checkLogged(socket, IOconnections)
+    
+    checkForLogin.then(
+        result => {
+            if (result == -2) { 
+                gamesTable.reloadTable(socket, IOconnections)
+                let getAns = sendRG.getRequest(socket, IOconnections,io)
+                getAns.then(
+                    result => {
+                        waitingForStartGame1.set(result[0], result)
+                        waitingForStartGame2.set(result[1], result)
+                        gameConfirmed.set(result,[false,false])
+                    },
+                    error => {
+                    }
+                )
             }
-            if(sock<=minInd){
-                minInd = sock-1
+            else {
+                firstPlayer = waitingForStartGame1.get(result)
+                secondPlayer = waitingForStartGame2.get(result)
+                if (firstPlayer != undefined) {
+                    let confirms = gameConfirmed.get(firstPlayer)
+                    confirms[0] = true
+                    if (confirms[0] == true && confirms[1] == true) {
+                        gameLoader.createGame2(firstPlayer,io)
+                    }
+                }
+                else if (secondPlayer != undefined) {
+                    let confirms = gameConfirmed.get(secondPlayer)
+                    confirms[1] = true
+                    if (confirms[0] == true && confirms[1] == true) {
+                        gameLoader.createGame2(secondPlayer,io)
+                    }
+                }
+                else {
+                    socket.to(result.toString()).emit('redirect','/gamesMenu/')
+                }
             }
-        });
-        
-        if(minInd>=0)
-            connections.set(socket,minInd)
-        else
-            connections.set(socket,maxInd)
-    }else{
-        connections.set(socket, 0)
-    }
-
-    // socket.on('get player', function(){
-    //     socket.emit('set player', connections.get(socket))
-    // })
-    // if(connections.size>2){
-    //     socket.emit('redirect','404')
-    // }
-    // if(connections.size===2&&!syncTimer.timerOn){
-    //     syncTimer.timerOn=true
-    //     syncTimer.syncTimer(connections)
-    // }
+        },
+        error => {
+            registration.regSocket(socket,SQLconnection)
+            logIn.logInSocket(socket, SQLconnection, IOconnections)
+        }
+    )
+    
+    
+    
+    
+    
 
 
 })
+
 
 

@@ -9,8 +9,11 @@ $('.sign-up_back').on('click', function () {
 })
 
 $('.sign-up_sign-up').on('click', function () {
-    console.log(document.querySelector('.sign-up_form').querySelector('[name="email"]').value)
-    //document.querySelector('.sign-in').classList.add('invisible')
+    let email = document.querySelector('.sign-up_form').querySelector('[name="email"]').value
+    let nick = document.querySelector('.sign-up_form').querySelector('[name="nickname"]').value
+    let pass = document.querySelector('.sign-up_form').querySelector('[name="pass"]').value
+    socket.emit('register',email,nick,pass)
+    
 })
 
 
