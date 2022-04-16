@@ -32,13 +32,27 @@ class Hero{
     }
 
 
-    set num(num){
-        this.num = num
-        this.hexesNearForMove=this.#getHexesNear(this.hexesForMove,this.num)
-        this.hexesNearForAttack=this.#getHexesNear(this.hexesForAttack,this.num)
+    // set num(num){
+    //     this.num = num
+    //     this.hexesNearForMove=this.#getHexesNear(this.hexesForMove,this.num)
+    //     this.hexesNearForAttack=this.#getHexesNear(this.hexesForAttack,this.num)
+    // }
+
+    createData() {
+        return  {
+            name: this.name,
+            num: this.num,
+            health: this.health,
+            shield: this.shield,
+            commonShield: this.commonShield,
+            defShield: this.defShield,
+            dmgAttack: this.dmgAttack,
+            exDmgAttack: this.exDmgAttack,
+            cellForAttack: this.cellForAttack,
+            cellForMove: this.cellForMove,
+            actionCharge: this.actionCharge,
+        }
     }
-
-
 
 
     #getHexesNear(distance,num){

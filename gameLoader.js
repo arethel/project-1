@@ -8,6 +8,7 @@ let timer = require('./mechanics/classes/timer')
 
 let Grid = require('./mechanics/classes/grid')
 
+
 class Match{
     
     heroes1 = new Map()
@@ -17,13 +18,16 @@ class Match{
     timer
     grid
     constructor(id1, id2, io) {
+        this.io = io
         
         this.players.push(id1)
         this.players.push(id2)
         this.grid = new Grid(4,12)
-        this.heroes1.set('knight',new defaultKnight.Knight(id1, this.grid))
-        this.heroes2.set('knight',new defaultKnight.Knight(id2, this.grid))
-        this.io = io
+        this.heroes1.set('knight',new defaultKnight.Knight([6, 0], this.grid))
+        this.heroes2.set('knight', new defaultKnight.Knight([5, 0], this.grid))
+        
+        
+        this.sendData()
         
         let time = 5
         
@@ -35,8 +39,16 @@ class Match{
         // this.syncTimer(time,10000)
     }
     
-    sendMess(id,mess) {
-        this.io.to(id.toString()).emit('message',mess)
+    sendData() {
+        let heroes = [[], []]
+        this.heroes1.forEach((value, key) => {
+            heroes[0].push([key, value.createData()])
+        })
+        this.heroes2.forEach((value, key) => {
+            heroes[1].push([key, value.createData()])
+        })
+        this.io.to(this.players[0].toString()).emit('getData', heroes)
+        this.io.to(this.players[1].toString()).emit('getData', [heroes[1],heroes[0]])
     }
     
     setNewTimeAfterZero() {

@@ -67,7 +67,6 @@ let gameConfirmed = new Map()
 
 io.sockets.on('connection', function (socket) {
     
-    
     IOconnections.set(socket, -1)
     socket.on('disconnect',function(data){
         IOconnections.delete(socket)
